@@ -1,0 +1,21 @@
+<button onclick="scrollToTop()" id="scrollUpBtn" title="Go to top">↑</button>
+
+<script>
+// Function to scroll to the top of the page
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Smooth scrolling effect
+    });
+}
+
+// Show/hide scroll-up button based on scroll position
+window.onscroll = function() {
+    var scrollUpBtn = document.getElementById("scrollUpBtn");
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        scrollUpBtn.style.display = "block";
+    } else {
+        scrollUpBtn.style.display = "none";
+    }
+};
+</script>
