@@ -714,73 +714,6 @@ li {
 }
 }
 
-/*review section*/
-
-.container {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    label {
-        display: block;
-        margin-bottom: 5px;
-        color: #555;
-    }
-    input[type="text"],
-    input[type="email"],
-    textarea {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-    textarea {
-        height: 100px;
-    }
-    input[type="submit"] {
-        background-color: var(--indianred);
-        color: var(--lightgreen);
-        padding: 12px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: 0.3s ease;
-    }
-    input[type="submit"]:hover {
-        background-color: var(--lightorange);
-    }
-
-.reviews-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    grid-template-rows: auto;
-}
-.review {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.review p {
-    margin: 5px 0;
-}
-
-.review__section {
-    text-align: center;
-    padding: 20px;
-    font-size: 2rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    background-color: var(--nude);
-}
 
 /*footer section*/
 
@@ -890,3 +823,264 @@ li {
   .floating-btn:hover {
     background-color: var(--yellow);
   }
+
+  /* ===== LOGIN PAGE (MATCH YOUR THEME) ===== */
+
+.login {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--nude);
+}
+
+.login__container {
+    width: 380px;
+    background: var(--white);
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.login__title {
+    font-size: 2rem;
+    color: var(--indianred);
+    margin-bottom: 5px;
+}
+
+.login__subtitle {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.login__input {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.login__input label {
+    font-size: 0.85rem;
+    color: var(--indianred);
+}
+
+.login__input input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+}
+
+.login__input input:focus {
+    border-color: var(--indianred);
+    outline: none;
+}
+
+.login__btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--indianred);
+    color: var(--white);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login__btn:hover {
+    background: var(--lightorange);
+}
+
+.login__register {
+    margin-top: 15px;
+    font-size: 0.85rem;
+}
+
+/* ===== REVIEW PAGE CLEAN ===== */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--nude);
+    overflow-x: hidden;
+}
+
+.review-page {
+    min-height: 100vh;
+    background: var(--nude);
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.review-header h1 {
+    font-size: 2.5rem;
+    color: var(--indianred);
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.review-subtitle {
+    color: #777;
+    margin-bottom: 40px;
+}
+
+/* GRID LAYOUT */
+.review-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* CARD */
+.review-card {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    text-align: left;
+    transition: 0.3s;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+}
+
+/* STARS */
+.stars {
+    color: gold;
+    margin-bottom: 10px;
+}
+
+/* NAME */
+.review-card h3 {
+    color: var(--indianred);
+    margin-bottom: 10px;
+}
+
+/* TEXT */
+.review-card p {
+    color: #555;
+    line-height: 1.5;
+}
+
+/* BUTTON */
+.back-btn {
+    display: inline-block;
+    margin-top: 40px;
+    text-decoration: none;
+    background: var(--indianred);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: var(--lightorange);
+}
+.skin-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.skin-title h1 {
+    font-size: 3rem;
+    color: #d35400; /* dark orange 🔥 */
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.skin-title p {
+    font-size: 1.2rem;
+    color: #b04a00;
+}
+
+.suggestion-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+}
+.skin-title h1 {
+    font-size: 3rem;
+    color: #d35400;
+    font-weight: 700;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.skin-title h1::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 3px;
+    background: #d35400;
+    margin: 10px auto 0;
+    border-radius: 5px;
+}
+/* CART BUBBLE */
+.cart-bubble {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 65px;
+    height: 65px;
+    background: #fff;
+    border: 3px solid #e74c3c;
+    border-radius: 50%;
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 999;
+}
+
+/* NUMBER BADGE */
+#cart-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 5px 8px;
+    border-radius: 50%;
+}
+
+/* POPUP MESSAGE */
+.popup-msg {
+    position: fixed;
+    bottom: 100px;
+    right: 25px;
+    background: #333;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 20px;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+/* SHOW POPUP */
+.popup-msg.show {
+    opacity: 1;
+}
+button {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+}
