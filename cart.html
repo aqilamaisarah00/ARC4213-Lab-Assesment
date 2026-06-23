@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        html, body {
+    margin: 0;
+    padding: 0;
+    background: #e6d3c3;
+}
+
+        .cart-container {
+            max-width: 800px;
+            margin: 80px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #c94f2d;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item p {
+            margin: 0;
+        }
+
+        .remove-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .total {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .clear-btn {
+            width: 100%;
+            margin-top: 15px;
+            padding: 10px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #c94f2d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .pay-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    background: #c94f2d; /* sama theme */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.pay-btn:hover {
+    background: #a63d22;
+}
+    </style>
+</head>
+
+<body>
+
+<!-- BACK BUTTON -->
+<button class="back-btn" onclick="goBack()">← Back</button>
+
+<div class="cart-container">
+
+    <h1>Your Cart 🛒</h1>
+
+    <div id="cart-items"></div>
+
+    <div class="total">
+        Total: RM <span id="total">0</span>
+    </div>
+
+    <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
+    <button class="pay-btn" onclick="fakePayment()">Proceed to Payment</button>
+
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function renderCart() {
+    let html = "";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        html += `
+            <div class="cart-item">
+                <p>${item.name} - RM ${item.price}</p>
+                <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+            </div>
+        `;
+        total += item.price;
+    });
+
+    document.getElementById("cart-items").innerHTML = html;
+    document.getElementById("total").innerText = total.toFixed(2);
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+}
+
+function clearCart() {
+    localStorage.removeItem("cart");
+    cart = [];
+    renderCart();
+}
+
+function goBack() {
+    window.location.href = "lop.html";
+}
+
+// LOAD
+renderCart();
+
+function fakePayment() {
+    alert("Proceeding to payment...");
+}
+
+let isLoggedIn = localStorage.getItem("loggedIn");
+
+// ❌ kalau belum login → terus redirect
+if (isLoggedIn !== "true") {
+    alert("Please login to access your cart 🛒");
+    window.location.href = "login.html";
+}
+
+</script>
+
+</body>
+</html>
