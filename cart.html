@@ -129,7 +129,7 @@ function renderCart() {
                 <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
             </div>
         `;
-        total += item.price;
+        total += Number(item.price);
     });
 
     document.getElementById("cart-items").innerHTML = html;
