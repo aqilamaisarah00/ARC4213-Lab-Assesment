@@ -11,12 +11,85 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     </head>
+    <!-- FLOATING CART BUBBLE -->
+<div class="cart-bubble" onclick="goToCart()">
+    🛒
+    <span id="cart-count">0</span>
+</div>
+
+<!-- POPUP MESSAGE -->
+<div id="popup-msg" class="popup-msg">
+    Added to cart 🛒
+</div>
+    <script>
+window.onload = function() {
+    let btn = document.getElementById("loginBtn");
+    let isLoggedIn = localStorage.getItem("loggedIn");
+
+    if (isLoggedIn === "true") {
+        btn.innerHTML = "Logout";
+        btn.href = "#";
+
+        btn.onclick = function() {
+            localStorage.removeItem("loggedIn");
+            window.location.href = "login.html";
+        };
+    }
+};
+</script>
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function updateCartCount() {
+    document.getElementById("cart-count").innerText = cart.length;
+}
+
+// ADD TO CART
+function addToCart(name, price) {
+
+    let isLoggedIn = localStorage.getItem("loggedIn");
+
+    // ❌ NOT LOGIN
+    if (isLoggedIn !== "true") {
+        alert("Please login first 🔐");
+        window.location.href = "login.html";
+        return;
+    }
+
+    // ✅ LOGIN → BOLEH ADD
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    cart.push({ name, price });
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    updateCartCount();
+    showPopup();
+}
+
+// POPUP MESSAGE
+function showPopup() {
+    let popup = document.getElementById("popup-msg");
+    popup.classList.add("show");
+
+    setTimeout(() => {
+        popup.classList.remove("show");
+    }, 1500);
+}
+
+// GO TO CART PAGE
+function goToCart() {
+    window.location.href = "cart.html";
+}
+
+// LOAD COUNT
+updateCartCount();
+</script>
     <body>
 
         <!-- NavBar Section-->
         <div class="main">
         <nav class="navbar">
-        <a href="/" class="navbar__logo">LocalSajer</a>
+        <a href="index.html" class="navbar__logo">LocalSajer</a>
             <div class="navbar__toggle" id="mobile-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -26,7 +99,8 @@
                 <a href="skinconcern.html" class="navbar__link">Skin Concern</a>
                 <a href="routine.html" class="navbar__link">Skin Care Routine</a>
                 <a href="lop.html" class="navbar__link">List of Products</a>
-                <a href="review.php" class="navbar__link">Feedback</a>
+                <a href="review.html" class="navbar__link">Feedback</a>
+                <a href="login.html" class="navbar__link" id="loginBtn">Login</a>
             </div>
         </nav>
 
@@ -39,275 +113,244 @@
             </div>
         </div>
 
-        <header class="header">
-            <h1>Products for Your Skin Type</h1>
-        </header>
-        
-        <div class="lop__list">
-            <h2 class="lop__headings">List of Brands</h2>
-            <ul class="lop__links">
-                <li><a href="https://www.healezbeauty.com/" class="lop__link">Healez HQ</a></li>
-                <li><a href="https://www.theraw.com.my/" class="lop__link">The Raw</a></li>
-                <li><a href="https://kaymanbeauty.com/" class="lop__link">Kayman Beauty</a></li>
-                <li><a href="https://www.alluskin.com/" class="lop__link">Alluskin</a></li>
-                <li><a href="https://shorturl.at/kUWY2" class="lop__link">CUURA</a></li>
-            </ul>
-            <h1>Skincare Steps</h1>
-            <h2>Cleanser</h2>
+        <!-- HEADER -->
+<header class="header">
+</header>
+
+<!-- NORMAL -->
+<div id="normal" class="skin-section">
+
+    <div class="skin-title">
+        <h1>Normal Skin Type</h1>
+        <p>Here are some of the products that could suit your skin type</p>
+    </div>
+        <div class="combination">
+            <div class="combination__container">
+                <h1>Suggestion :</h1>
+                <div class="column">
+                    <img src="images/cuuracleanser.jpeg">
+                    <p><a href="https://shorturl.at/ijyR3" class="lop__link">CUURA's Detox Cleanser</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
+                </div>
+                <div class="column">
+                    <img src="images/healezcleanser.jpeg">
+                    <p><a href="https://shorturl.at/clMR7" class="lop__link">Healez Ultra Defensive Calming Cleanser</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
+                </div>
+                <div class="column">
+                    <img src="images/alluskinserum.jpeg">
+                    <p><a href="https://www.alluskin.com/products/alluskin-lightbulb-serum" class="lop__link">Lightbulb Serum</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
+                </div>
+                <div class="column">
+                    <img src="images/kaymanserum.jpeg">
+                    <p><a href="https://kaymanbeauty.com/collections/all/products/skintella-repairing-serum" class="lop__link">SKINTELLA Repairing Serum</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
+                </div>
+                <div class="column">
+                    <img src="images/alluskinsunscreen.jpeg">
+                    <p><a href="https://www.alluskin.com/products/alluskin-barrier-sun-shield-sunscreen" class="lop__link">Barrier Sun Shield</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
+                </div>
+            </div> 
         </div>
 
-            <div class="cleanser__container">
+<!-- HEADER -->
+<header class="header">
+</header>
 
-                <div class="cleanser__item">
-                    <img src="images/healezcleanser.jpeg" alt="Healez Cleanser">
-                <div class="cleanser__details">
-                    <h3><a href="https://shorturl.at/clMR7" class="lop__link">Healez Ultra Defensive Calming Cleanser</a></h3>
-                <p class="cleanser__desc"> 
-                    <p>Key Ingredient inside :</p>
-                    <li>Hypochlorous Acid</li>
-                    <li>Ferulic Acid</li>
-                    <li>Defensil Pure Fermented Gold Milet</li>
-                    <li>Sodium Hyaluronic</li>
-                </p>
-                </div>
-                </div>
-              
+        <!-- OILY -->
+<div id="oily" class="skin-section">
 
-                <div class="cleanser__item">
-                    <img src="images/alluskincleanser.jpeg" alt="Alluskin Cleanser">
-                <div class="cleanser__details">
-                <h3><a href="https://shorturl.at/cHQS2" class="lop__link">Prebiotic Glycolic Acid Cleanser</a></h3>
-                <p class="cleanser__desc"> 
-                    <li>Gentle for dry and sensitive skin</li>
-                    <li>Packed with 01% Glycolic Acid</li>
-                    <li>Prebiotics Witch Hazel</li>
-                    <li>Allantoin</li>
-                    <li>Prefect for acne-prone and problematic skin</li>
-                </p>
+    <div class="skin-title">
+        <h1>Oily Skin Type</h1>
+        <p>Here are some of the products that could suit your skin type</p>
+    </div>
+        <div class="combination">
+            <div class="combination__container">
+                <h1>Suggestion :</h1>
+                <div class="column">
+                    <img src="images/healezcleanser.jpeg">
+                    <p><a href="https://shorturl.at/clMR7" class="lop__link">Healez Ultra Defensive Calming Cleanser</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
+                <div class="column">
+                    <img src="images/therawcleanser.jpg">
+                    <p><a href="https://shorturl.at/dvwNU" class="lop__link">The Raw</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
-
-                <div class="cleanser__item">
-                    <img src="images/therawcleanser.jpg" alt="The Raw Cleanser">
-                <div class="cleanser__details">
-                <h3><a href="https://shorturl.at/dvwNU" class="lop__link">The Raw</a></h3>
-                <p class="cleanser__desc"> 
-                    <li>3 series of cleanser and have their own function</li>
-                    <li>Hydrating Ceramides Cleanser, Acne Ceramides Cleanser<br> and Rough and Bumpy Ceramides Cleanser</li>
-                    <li>Ceramides as their main ingredient which help to hydrate skin and moist boosting effect.</li>
-                </p>
+                <div class="column">
+                    <img src="images/healezserum.jpg">
+                    <p><a href="https://www.healezbeauty.com/products/acne-corrective-hydrating-serum-skincare-treatments" class="lop__link">Acne Corrective Hydrating Serum</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
+                <div class="column">
+                    <img src="images/healezmoisturiser.jpg">
+                    <p><a href="https://www.healezbeauty.com/products/healez-daily-regenerative-soothing-moisturizer-moisturizers-skincare" class="lop__link">Healez Daily Regenerative Soothing Moisturiser</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
-
-                <div class="cleanser__item">
-                    <img src="images/cuuracleanser.jpeg" alt="CUURA Cleanser">
-                <div class="cleanser__details">
-                <h3><a href="https://shorturl.at/ijyR3" class="lop__link">CUURA's Detox Cleanser</a></h3>
-                <p class="cleanser__desc"> 
-                    <li>Helps to remove oils, dirt, light makeup, excess sebum and any pollutants</li>
-                    <li>Gentle for skin</li>
-                </p>
+                <div class="column">
+                    <img src="images/therawmoisturiser.jpeg">
+                    <p><a href="https://www.theraw.com.my/Store/Daily-Ceramide-Moisturiser-50g-p428146553" class="lop__link"> Daily Ceramide Moisturiser </a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
-                </div>
-
-                <div class="cleanser__item">
-                    <img src="images/kaymancleanser1.jpeg" alt="Kayman Cleanser">
-                <div class="cleanser__details">
-                <h3><a href="https://bit.ly/coalberry-cleanser" class="lop__link">CoalBerry Cleanser</a></h3>
-                <p class="cleanser__desc"> 
-                    <li>low-pH gel cleanser</li>
-                    <li>Formulated with activated charcoal, honey extract and 10 different berry extracts</li>
-                    <li>Brightening, anti-inflammatory, and anti-aging affects</li>
-                </p>
-                </div>
+                <div class="column">
+                    <img src="images/alluskinsunscreen.jpeg">
+                    <p><a href="https://www.alluskin.com/products/alluskin-barrier-sun-shield-sunscreen" class="lop__link">Barrier Sun Shield</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
             </div>
 
-            <div class="lop__list"><h2> Serum </h2></div>
+            <p> </p>
+        </div>
 
-            <div class="serum__container">
+<!-- COMBINATION -->
+ <!-- HEADER -->
+<header class="header">
+</header>
 
-                <div class="serum__item">
-                    <img src="images/healezserum.jpg" alt="Healez Serum">
-                <div class="serum__details">
-                    <h3><a href="https://www.healezbeauty.com/products/acne-corrective-hydrating-serum-skincare-treatments" class="lop__link">Acne Corrective Hydrating Serum</a></h3>
-                    <p class="serum__desc">
-                        <p>Key ingredients :<p> 
-                        <li>Hyprochlorus Acid</li>
-                        <li>Salicylic Acid</li>
-                        <li>Citric, Lactic & Malic Acid</li>
-                        <li>Niacinamide</li>
-                    </p>
-                </div>
-                </div>
+<div id="combination" class="skin-section">
 
-                <div class="serum__item">
-                    <img src="images/alluskinserum.jpeg" alt="Alluskin Serum">
-                <div class="serum__details">
-                    <h3><a href="https://www.alluskin.com/products/alluskin-lightbulb-serum" class="lop__link">Lightbulb Serum</a></h3>
-                    <p class="serum__desc"></a> 
-                        <li>Light weight gel serum</li>
-                        <li>Soothing, Hydrating and Anti-Aging</li>
-                        <li>Used Arbutin, Vitamin C, Glutathione, and Rosemary Extract</li>
-                    </p>
-                </div>
-                </div>
+    <div class="skin-title">
+        <h1>Combination Skin Type</h1>
+        <p>Here are some of the products that could suit your skin type</p>
+    </div>
+<div id="combination" class="skin-section">
 
-                <div class="serum__item">
-                    <img src="images/arbutin.jpeg" alt=" The Raw Arbutin Serum">
-                <div class="serum__details">
-                    <h3><a href="https://www.theraw.com.my/Store/Arbutin-2-Serum-30g-p428146551" class="lop__link">The Raw Arbutin 2% Serum</a></h3>
-                    <p class="serum__desc">
-                        <li>Formulated with Arbutin, Niacinamide and Glutathione</li>
-                        <li>Rich with Provitamin B5 and Hyaluronic Acid that helps with moisture repair</li>
-                        <li>Lighten dark spots and improve uneven skin</li>
-                    </p>
+        <div class="combination">
+            <div class="combination__container">
+                <h1>Suggestion :</h1>
+                <div class="column">
+                    <img src="images/alluskincleanser.jpeg">
+                    <p><a href="https://shorturl.at/cHQS2" class="lop__link">Prebiotic Glycolic Acid Cleanser</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
+                <div class="column">
+                    <img src="images/kaymancleanser1.jpeg">
+                    <p><a href="https://bit.ly/coalberry-cleanser" class="lop__link">CoalBerry Cleanser</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
-
-                <div class="serum__item">
-                    <img src="images/sbs.jpeg" alt="The Raw Barrier Serum">
-                <div class="serum__details">
-                    <h3><a href="https://www.theraw.com.my/Store/The-Raw-Strong-Barrier-Serum-30-ml-p484054495" class="lop__link">The Raw Strong Barrier Serum</a></h3>
-                    <p class="serum__desc">
-                        <li>Supplementing your skin barrier with essential lipids</li>
-                        <li>Super lightweight and absorbs almost instantly</li>
-                        <li>Boost skin barrier function to promote healthy skin</li>
-                    </p>
+                <div class="column">
+                    <img src="images/sbs.jpeg">
+                    <p><a href="https://www.theraw.com.my/Store/The-Raw-Strong-Barrier-Serum-30-ml-p484054495" class="lop__link">The Raw Strong Barrier Serum</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
+                <div class="column">
+                    <img src="images/cuuramoisturiser.jpeg">
+                    <p><a href="" class="lop__link">Aqua Boost Moisturiser (72 hours hydration water cream)</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
-
-                <div class="serum__item">
-                    <img src="images/niacinamide.jpeg" alt="The Raw Barrier Serum">
-                <div class="serum__details">
-                    <h3><a href="https://www.theraw.com.my/Store/Niacinamide-5-Serum-30g-p428156291" class="lop__link">The Raw 5% Niacinamide</a></h3>
-                    <p class="serum__desc">
-                        <li>Controls excessive sebum production, reduces acne and congestion</li>
-                        <li>Improves appearance of enlarged pores and brightens skin tone</li>
-                        <li>Formulated with Niacinamide (5%), Glycolic Acid (0.7%), Salicylic Acid(0.3%)</li>
-                    </p>
+                <div class="column">
+                    <img src="images/alluskinmoisturiser.jpeg">
+                    <p><a href="https://www.alluskin.com/products/alluskin-barrier-cream-50ml-moisturiser" class="lop__link">Barrier Cream</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
-                </div>
-
-                <div class="serum__item">
-                    <img src="images/cuuraserum.jpeg" alt="CUURA Serum">
-                <div class="serum__details">
-                    <h3><a href="https://cuuraofficial.com/product/bye-bye-breakout-serum-anti-acne/" class="lop__link">Bye Bye Breakout (Anti-Acne Serum)</a></h3>
-                    <p class="serum__desc">
-                        <li>Enhanced to balance, hydrate and repair troubled acne prone skin</li>
-                        <li>Formulated with Salicylic Acid, Niacinamide, actives to help reduce pore congestion</li>
-                        <li>Suit all skin type especially acne-prone and sensitive skin</li>
-                    </p>
-                </div>
-                </div>
-
-                <div class="serum__item">
-                    <img src="images/kaymanserum.jpeg" alt=" Kayman Serum">
-                <div class="serum__details">
-                    <h3><a href="https://kaymanbeauty.com/collections/all/products/skintella-repairing-serum" class="lop__link">SKINTELLA Repairing Serum</a></h3>
-                    <p class="serum__desc">
-                        <li>Highly concentrated serum with Centella Asiatica as the main ingredients</li>
-                        <li>Aims to repair and strengthen skin and also restores skin elasticity while soothing</li>
-                        <li>Added with calming properties like prickly pear extract and chamomile extract</li>
-                    </p>
-                </div>
+                <div class="column">
+                    <img src="images/cuuraSS.jpeg">
+                    <p><a href="https://cuuraofficial.com/product/brightening-sunscreen/" class="lop__link">Brightening Sunscreen</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
             </div>
 
+            <p> </p>
+        </div>
 
-            <div class="lop__list"><h2> Moisturiser </h2></div>
+<!-- DRY -->
+ <!-- HEADER -->
+<header class="header">
+</header>
 
+<div id="dry" class="skin-section">
 
-            <div class="moisturiser__container">
-
-                <div class="moisturiser__item">
-                    <img src="images/healezmoisturiser.jpg" alt="Healez Moisturiser">
-                <div class="moisturiser__details">
-                    <h3><a href="https://www.healezbeauty.com/products/healez-daily-regenerative-soothing-moisturizer-moisturizers-skincare" class="lop__link">Healez Daily Regenerative Soothing Moisturiser</a></h3>
-                    <p class="moisturiser__desc"> 
-                        <li>Uses 7 natural plant extracts for anti-irritation effects</li>
-                        <li>Reduces inflammation, speeds up acne recovery and calm skin</li>
-                        <li>Help with controlling sebum and evens skin tone</li>
-                    </p>
+    <div class="skin-title">
+        <h1>Dry Skin Type</h1>
+        <p>Here are some of the products that could suit your skin type</p>
+    </div>
+        <div class="combination">
+            <div class="combination__container">
+                <h1>Suggestion :</h1>
+                <div class="column">
+                    <img src="images/alluskincleanser.jpeg">
+                    <p><a href="https://shorturl.at/cHQS2" class="lop__link">Prebiotic Glycolic Acid Cleanser</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
+                <div class="column">
+                    <img src="images/therawcleanser.jpg">
+                    <p><a href="https://shorturl.at/dvwNU" class="lop__link">The Raw</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
-                
-                <div class="moisturiser__item">
-                    <img src="images/alluskinmoisturiser.jpeg" alt="Alluskin Moisturiser">
-                <div class="moisturiser__details">
-                    <h3><a href="https://www.alluskin.com/products/alluskin-barrier-cream-50ml-moisturiser" class="lop__link">Barrier Cream</a></h3>
-                    <p class="moisturiser__desc"> 
-                        <li>Gel-cream consistency</li>
-                        <li>Contain 1% niacinamide</li>
-                        <li>The triad of skin barrier lipids</li>
-                        <li>Perfect to repair your damaged skin barrier</li>
-                    </p>
+                <div class="column">
+                    <img src="images/kaymanserum.jpeg">
+                    <p><a href="https://kaymanbeauty.com/collections/all/products/skintella-repairing-serum" class="lop__link">SKINTELLA Repairing Serum</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
+                <div class="column">
+                    <img src="images/healezserum.jpg">
+                    <p><a href="https://www.healezbeauty.com/products/acne-corrective-hydrating-serum-skincare-treatments" class="lop__link">Acne Corrective Hydrating Serum</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
-
-                <div class="moisturiser__item">
-                    <img src="images/therawww.jpeg" alt="The Raw Moisturiser">
-                <div class="moisturiser__details">
-                    <h3><a href="https://www.theraw.com.my/Store/Daily-Ceramide-Moisturiser-50g-p428146553" class="lop__link"> Daily Ceramide Moisturiser </a></h3>
-                    <p class="moisturiser__desc"> 
-                        <li>Uniquely blended with Natural Moisturising Factor(NMF), Squalane, Hyaluronic Acid and Jojoba Oil</li>
-                        <li>Formulated together with ceramide and free fatty acid to maintain optimal skin barrier function</li>
-                        <li>Hydrates and improves skin barrier function</li>
-                    </p>
+                <div class="column">
+                    <img src="images/healezmoisturiser.jpg">
+                    <p><a href="https://www.healezbeauty.com/products/healez-daily-regenerative-soothing-moisturizer-moisturizers-skincare" class="lop__link">Healez Daily Regenerative Soothing Moisturiser</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
+                <div class="column">
+                    <img src="images/alluskinmoisturiser.jpeg">
+                    <p><a href="https://www.alluskin.com/products/alluskin-barrier-cream-50ml-moisturiser" class="lop__link">Barrier Cream</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
-
-                <div class="moisturiser__item">
-                    <img src="images/cuuramoisturiser.jpeg" alt="CUURA Moisturiser">
-                <div class="moisturiser__details">
-                    <h3><a href="" class="lop__link">Aqua Boost Moisturiser (72 hours hydration water cream)</a></h3>
-                    <p class="moisturiser__desc"> 
-                        <li>Formulated with Cucumber Extract, Saccaride Isomerate, Hyaluronic Acid and Rice Bran Extract</li>
-                        <li>Gel-like face cream that helps minimizes dullness and spots</li>
-                        <li>Suit All skin type</li>
-                    </p>
-                </div>
-                </div>
-
-                <div class="moisturiser__item">
-                    <img src="images/moisturiserkayman.jpeg" alt="Kayman Moisturiser">
-                <div class="moisturiser__details">
-                    <h3><a href="https://kaymanbeauty.com/collections/all/products/skintella-moisturizing-gel" class="lop__link">SKINTELLA Moisturising Gel </a></h3>
-                    <p class="moisturiser__desc"> 
-                        <li>Enriched with Centella Asiatica extract, 5 types of Ceramide, Beta Glucan Squalane, and Cholestrol</li>
-                        <li>Texture between gel and cream</li>
-                        <li>Provide enough moisture to assist barrier repair and restoring the natural compound</li>
-                    </p>
-                </div>
-                </div>
-            </div>
-
-            <div class="lop__list"><h2> Sunscreen </h2></div>
-
-            <div class="sunscreen__container">
-                
-                <div class="sunscreen__item">
-                    <img src="images/alluskinsunscreen.jpeg" alt="Alluskin SS">
-                <div class="sunscreen__details">
-                    <h3><a href="https://www.alluskin.com/products/alluskin-barrier-sun-shield-sunscreen" class="lop__link">Barrier Sun Shield</a></h3>
-                    <p class="sunscreen__desc">
-                        <li>Help to protect, repair and moisturise your skin</li>
-                        <li>Contains Niacinamide (3%), Vitamin E, Ceramide Complex and Ethyl Asscorbic Acid (0.5%)</li>
-                        <li>Help to reflect UV as well as absorb the UV to prevent sun damage</li>
-                    </p>
-                </div>
-                </div>
-
-                <div class="sunscreen__item">
-                    <img src="images/cuuraSS.jpeg" alt="CURAA SS">
-                <div class="sunscreen__details">
-                    <h3><a href="https://cuuraofficial.com/product/brightening-sunscreen/" class="lop__link">Brightening Sunscreen</a></h3>
-                    <p class="sunscreen__desc">
-                        <li>Broad-spectrum sunscreen with SPF 50+ PA++++</li>
-                        <li>Very moisturising, lightweight, non-greasy and leaves no white cast</li>
-                        <li>First local HALAL hybrid sunscreen</li>
-                    </p>
-                </div>
+                <div class="column">
+                    <img src="images/alluskinsunscreen.jpeg">
+                    <p><a href="https://www.alluskin.com/products/alluskin-barrier-sun-shield-sunscreen" class="lop__link">Barrier Sun Shield</a></p>
+                    <button onclick="addToCart('CUURA Detox Cleanser', 59.90)">
+                   Add to Cart
+                    </button>
                 </div>
             </div>
         </div>  
