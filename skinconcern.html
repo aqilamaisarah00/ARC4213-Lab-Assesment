@@ -11,12 +11,28 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     </head>
+    <script>
+window.onload = function() {
+    let btn = document.getElementById("loginBtn");
+    let isLoggedIn = localStorage.getItem("loggedIn");
+
+    if (isLoggedIn === "true") {
+        btn.innerHTML = "Logout";
+        btn.href = "#";
+
+        btn.onclick = function() {
+            localStorage.removeItem("loggedIn");
+            window.location.href = "login.html";
+        };
+    }
+};
+</script>
     <body>
 
         <!-- NavBar Section-->
         <div class="main">
         <nav class="navbar">
-        <a href="/" class="navbar__logo">LocalSajer</a>
+        <a href="index.html" class="navbar__logo">LocalSajer</a>
             <div class="navbar__toggle" id="mobile-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -26,7 +42,8 @@
                 <a href="skinconcern.html" class="navbar__link">Skin Concern</a>
                 <a href="routine.html" class="navbar__link">Skin Care Routine</a>
                 <a href="lop.html" class="navbar__link">List of Products</a>
-                <a href="review.php" class="navbar__link">Feedback</a>
+                <a href="review.html" class="navbar__link">Feedback</a>
+                <a href="login.html" class="navbar__link" id="loginBtn">Login</a>
             </div>
         </nav>
 
