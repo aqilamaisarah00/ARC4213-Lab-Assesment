@@ -21,7 +21,7 @@
         <!-- NavBar Section-->
         <div class="main">
         <nav class="navbar">
-            <a href=".index.php" class="navbar__logo">LocalSajer</a>
+            <a href="index.html" class="navbar__logo">LocalSajer</a>
             <div class="navbar__toggle" id="mobile-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -31,7 +31,8 @@
                 <a href="skinconcern.html" class="navbar__link">Skin Concern</a>
                 <a href="routine.html" class="navbar__link">Skin Care Routine</a>
                 <a href="lop.html" class="navbar__link">List of Products</a>
-                <a href="review.php" class="navbar__link">Feedback</a>
+                <a href="review.html" class="navbar__link">Feedback</a>
+                <a href="login.html" class="navbar__link" id="loginBtn">Login</a>
             </div>
         </nav>
 
@@ -53,19 +54,19 @@
         <h1 class="concern__heading"> What are your skin concerns? </h1>
         <div class="concern__content">
             <div class="concern__features">
-                <a href="/skinconcern.html#section4" style="text-decoration: none;">
+                <a href="skinconcern.html#section4" style="text-decoration: none;">
                     <p class="concern__feature"><i class="fas fa-check-circle"></i> Sensitive </p>
                 </a>
-                <a href="/skinconcern.html#section2" style="text-decoration: none;">
+                <a href="skinconcern.html#section2" style="text-decoration: none;">
                     <p class="concern__feature"><i class="fas fa-check-circle"></i> Hyperpigmentation </p>
                 </a>
-                <a href="/skinconcern.html#section3" style="text-decoration: none;">
+                <a href="skinconcern.html#section3" style="text-decoration: none;">
                     <p class="concern__feature"><i class="fas fa-check-circle"></i> Tiny Bumps </p>
                 </a>
-                <a href="/skinconcern.html#section1" style="text-decoration: none;">
+                <a href="skinconcern.html#section1" style="text-decoration: none;">
                     <p class="concern__feature"><i class="fas fa-check-circle"></i> Acne/Redness </p>
                 </a>
-                <a href="/skinconcern.html#section5" style="text-decoration: none;">
+                <a href="skinconcern.html#section5" style="text-decoration: none;">
                     <p class="concern__feature"><i class="fas fa-check-circle"></i> Dull Skin </p>
                 </a>
             </div>
@@ -92,7 +93,7 @@
                         <p>This skin is neither too dry nor too oily.</p>
                         <p>It has regular texture, no imperfections and does not need special care.</p>
                     </div>
-                    <a href="/normal.html" class="button">Go here</a>
+                    <a href="lop.html#normal" class="button">Go here</a>
                 </div>
         
                 <div class="skintype__type">
@@ -104,7 +105,7 @@
                         <p>Oily skin has a humid and bright appearance</p>
                         <p>It is caused by excessive fat production by sebaceous glands.</p>
                     </div>
-                    <a href="/oily.html" class="button">Go here</a>
+                    <a href="lop.html#oily" class="button">Go here</a>
                 </div>
         
                 <div class="skintype__type">
@@ -115,7 +116,7 @@
                     <div class="skintype__perks">
                         <p>The area with more oil is usually the T- zone (forehead, nose, and chin), while the skin on the cheeks is normal or dry.</p>
                     </div>
-                    <a href="/combination.html" class="button">Go here</a>
+                    <a href="lop.html#combination" class="button">Go here</a>
                 </div>
 
                 <div class="skintype__type">
@@ -126,7 +127,7 @@
                     <div class="skintype__perks">
                         <p>Dry skin is caused by external factors such as the weather, low air humidity and immersion in hot water</p>
                     </div>
-                    <a href="/dry.html" class="button">Go here</a>
+                    <a href="lop.html#dry" class="button">Go here</a>
                 </div>
             </div>
         </div> 
@@ -181,8 +182,22 @@
                 };
                 </script>
 
-
-
             
     </body>
 </html>
+<script>
+window.onload = function() {
+    let btn = document.getElementById("loginBtn");
+    let isLoggedIn = localStorage.getItem("loggedIn");
+
+    if (isLoggedIn === "true") {
+        btn.innerHTML = "Logout";
+        btn.href = "#";
+
+        btn.onclick = function() {
+            localStorage.removeItem("loggedIn");
+            location.reload();
+        };
+    }
+};
+</script>
